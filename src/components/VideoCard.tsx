@@ -24,7 +24,7 @@ export function VideoCard({
   showUploader = false,
   onDelete,
 }: VideoCardProps) {
-  const playbackUrl = `http://localhost:5000/outputs/${video.playback_filename}`
+  const playbackUrl = `${process.env.NEXT_PUBLIC_API_URL}/outputs/${video.playback_filename}`
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const handleMouseEnter = () => {
@@ -65,7 +65,7 @@ export function VideoCard({
         <div className="aspect-video bg-slate-200 flex items-center justify-center">
           {video.thumbnail_url ? (
             <img
-              src={`http://localhost:5000${video.thumbnail_url}`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}${video.thumbnail_url}`}
               alt={video.title || video.original_filename}
               className="w-full h-full object-cover"
             />

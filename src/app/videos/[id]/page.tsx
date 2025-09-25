@@ -54,8 +54,10 @@ export default function VideoPage() {
 
           // Fetch video and comments in parallel
           const [videoResponse, commentsResponse] = await Promise.all([
-            fetch(`http://localhost:5000/api/videos/${id}`),
-            fetch(`http://localhost:5000/api/videos/${id}/comments`),
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/videos/${id}`),
+            fetch(
+              `${process.env.NEXT_PUBLIC_API_URL}/api/videos/${id}/comments`
+            ),
           ])
 
           if (!videoResponse.ok) {
@@ -91,7 +93,7 @@ export default function VideoPage() {
     setVerificationResult(null)
     try {
       const response = await fetch(
-        `http://localhost:5000/api/videos/${video.id}/verify`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/videos/${video.id}/verify`,
         { headers: { Authorization: `Bearer ${token}` } }
       )
       const data = await response.json()
@@ -114,7 +116,7 @@ export default function VideoPage() {
     setIsPostingComment(true)
     try {
       const response = await fetch(
-        `http://localhost:5000/api/videos/${video.id}/comments`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/videos/${video.id}/comments`,
         {
           method: 'POST',
           headers: {
@@ -144,7 +146,7 @@ export default function VideoPage() {
     setIsUpdatingComment(true)
     try {
       const response = await fetch(
-        `http://localhost:5000/api/comments/${editingCommentId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/comments/${editingCommentId}`,
         {
           method: 'PUT',
           headers: {
@@ -173,7 +175,7 @@ export default function VideoPage() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/comments/${commentId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/comments/${commentId}`,
         {
           method: 'DELETE',
           headers: {
@@ -216,7 +218,7 @@ export default function VideoPage() {
     )
   }
 
-  const playbackUrl = `http://localhost:5000/outputs/${video.playback_filename}`
+  const playbackUrl = `${process.env.NEXT_PUBLIC_API_URL}/outputs/${video.playback_filename}`
 
   return (
     <main className="container mx-auto px-4 py-16">

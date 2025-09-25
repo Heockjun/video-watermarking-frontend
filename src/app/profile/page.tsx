@@ -38,7 +38,7 @@ export default function ProfilePage() {
 
     try {
       const response = await fetch(
-        'http://localhost:5000/api/profile/change-password',
+        `${process.env.NEXT_PUBLIC_API_URL}/api/profile/change-password`,
         {
           method: 'POST',
           headers: {
@@ -93,7 +93,7 @@ export default function ProfilePage() {
 
     try {
       const response = await fetch(
-        'http://localhost:5000/api/profile/delete-account',
+        `${process.env.NEXT_PUBLIC_API_URL}/api/profile/delete-account`,
         {
           method: 'POST',
           headers: {

@@ -41,7 +41,7 @@ export default function MyVideosPage() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/videos/${videoId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/videos/${videoId}`,
         { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } }
       )
 
@@ -64,7 +64,7 @@ export default function MyVideosPage() {
       setLoading(true) // 페이지 변경 시 로딩 상태 활성화
       try {
         const response = await fetch(
-          `http://localhost:5000/api/my-videos?page=${currentPage}&per_page=8`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/my-videos?page=${currentPage}&per_page=8`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

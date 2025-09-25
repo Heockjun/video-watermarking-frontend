@@ -136,22 +136,25 @@ export default function WatermarkInsert() {
     formData.append('title', title)
 
     try {
-      const response = await fetch('http://localhost:5000/api/embed', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: 'include',
-        body: formData,
-      })
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/embed`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: 'include',
+          body: formData,
+        }
+      )
 
       const data = await response.json()
       if (response.ok) {
         setMessage(
           '워터마크가 성공적으로 삽입되었으며, 재생 가능한 파일로 변환되었습니다.'
         )
-        const pUrl = `http://localhost:5000/outputs/${data.playback_filename}`
-        const mUrl = `http://localhost:5000/outputs/${data.master_filename}`
+        const pUrl = `${process.env.NEXT_PUBLIC_API_URL}/outputs/${data.playback_filename}`
+        const mUrl = `${process.env.NEXT_PUBLIC_API_URL}/outputs/${data.master_filename}`
         setPlaybackUrl(pUrl)
         setMasterUrl(mUrl)
         setVideoId(data.video_id)
@@ -178,7 +181,7 @@ export default function WatermarkInsert() {
     setVerificationResult(null)
     try {
       const response = await fetch(
-        `http://localhost:5000/api/videos/${videoId}/verify`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/videos/${videoId}/verify`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
