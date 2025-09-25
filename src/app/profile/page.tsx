@@ -45,7 +45,6 @@ export default function ProfilePage() {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
-          credentials: 'include',
           body: JSON.stringify({
             current_password: currentPassword,
             new_password: newPassword,
@@ -100,7 +99,6 @@ export default function ProfilePage() {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
-          credentials: 'include',
           body: JSON.stringify({ password: deletePassword }),
         }
       )

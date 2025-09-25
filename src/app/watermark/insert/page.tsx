@@ -143,7 +143,6 @@ export default function WatermarkInsert() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          credentials: 'include',
           body: formData,
         }
       )
