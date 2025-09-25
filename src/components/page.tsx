@@ -34,7 +34,9 @@ export default function VideoPage() {
       const fetchVideo = async () => {
         try {
           setLoading(true)
-          const response = await fetch(`http://localhost:5000/api/videos/${id}`)
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/videos/${id}`
+          )
           if (!response.ok) {
             const data = await response.json()
             throw new Error(data.error || '영상을 불러오는데 실패했습니다.')
@@ -61,7 +63,7 @@ export default function VideoPage() {
     setVerificationResult(null)
     try {
       const response = await fetch(
-        `http://localhost:5000/api/videos/${video.id}/verify`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/videos/${video.id}/verify`,
         { headers: { Authorization: `Bearer ${token}` } }
       )
       const data = await response.json()
@@ -101,7 +103,7 @@ export default function VideoPage() {
     )
   }
 
-  const playbackUrl = `http://localhost:5000/outputs/${video.playback_filename}`
+  const playbackUrl = `${process.env.NEXT_PUBLIC_API_URL}/outputs/${video.playback_filename}`
 
   return (
     <main className="container mx-auto px-4 py-16">
