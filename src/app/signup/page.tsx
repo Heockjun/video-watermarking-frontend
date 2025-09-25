@@ -18,8 +18,14 @@ export default function SignUp() {
     setMessage('')
 
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL
+      if (!apiUrl) {
+        throw new Error('API URL이 설정되지 않았습니다.')
+      }
+
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/signup`,
+        // 이미 위에서 .replace()를 적용했으므로 여기서는 제거합니다.
+        `${apiUrl.replace(/\/$/, '')}/api/signup`,
         {
           method: 'POST',
           headers: {

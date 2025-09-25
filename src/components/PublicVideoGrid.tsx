@@ -22,8 +22,12 @@ export function PublicVideoGrid() {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL
+        if (!apiUrl) {
+          throw new Error('API URL이 설정되지 않았습니다.')
+        }
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/videos/public`
+          `${apiUrl.replace(/\/$/, '')}/api/videos/public`
         )
         if (!response.ok) {
           throw new Error('비디오 목록을 불러오는데 실패했습니다.')
