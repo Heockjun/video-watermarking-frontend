@@ -99,7 +99,6 @@ export default function ProfilePage() {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ password: deletePassword }),
         }
       )
 
